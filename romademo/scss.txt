@@ -1,0 +1,80 @@
+﻿scss and sass methodologies:
+if you look at the intro to markup.css, you'll see a section commented as "variables." These would be coded to be reused as-
+$greenbg :#66bc46;
+$greybg :#50595a;
+$offwhitebg :#f6f7f7;
+$orangebg :#f37124;
+$whitebg :#ffffff;
+$rounded :14px;
+$blocks :inline-block;
+$full : 100%;
+
+
+and so on. setting up all of the commonly used elements. 
+later, structural divs like the menu would become- 
+
+#block-menu-menu-sidebar-menu .menu {
+background-color: $whitebg;
+border-bottom-right-radius: $rounded;
+border-top-left-radius: $rounded;
+border-top-right-radius: $rounded;
+}
+or perhaps the navs in that menu would include-
+#block-menu-menu-sidebar-menu a {
+float: left;
+width: $full;
+color: $greybg;
+}
+In SASS/SCSS all the navs would be nested like such-
+
+#block-menu-menu-top-navigation {
+	ul {	margin:0;
+  		padding:0;
+  		text-align:center;}
+	.menu {
+		background-color: $whitebg;
+  		border-color:#CCCCCC;
+  		border-style:solid none;
+  		border-width:1px;
+  		float:left;
+  		height:25px;
+  		overflow:hidden;
+  		width: $full;}
+	a {	
+		color:#666666 !important;
+  		display:inline-block;
+  		float:left;
+  		font-size:13px;
+  		font-weight:700;
+  		height:25px;
+  		min-width:70px;
+  		padding-left:0;
+  		padding-right:20px;
+  		padding-top:5px;
+  		text-decoration:none;
+  		text-transform:uppercase;}
+		
+}
+I would likely have a base.scss for my body styles where i could call all the global values like the 0 margins on the "body" property, the global styling for "a" tags, and probably font stacks and H tags-
+@import 'base'
+
+and I would use mixins for some of the cross browser QA for things like the corner radii and the shadows
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+#block-menu-menu-sidebar-menu { @include border-radius(14px); }
+
+I think the coolest implementation of SCSS would be for our breakpoints and device specific styles. instead of how I coded my body.mobile styles in CSS, they could be built as such-
+#sidebar-first {width:25%; display:block; float:left; }
+.mobile {
+	@extend #sidebar-first;
+	width: $full;
+	float:left;
+	margin-bottom:15px;
+}
+

@@ -1,0 +1,20 @@
+name = Romademo
+description = Romademo is a demo of coding and theming capabilities. use this only for demonsration purposes
+core = 7.x
+engine = phptemplate
+stylesheets[all][] = style.css
+
+regions[header]         = Header
+regions[navigation]     = Navigation
+regions[highlighted]    = Highlighted
+regions[help]           = Help
+regions[content]        = Content
+regions[column1]		= First column
+regions[column2]		= Second column
+regions[sidebar_first]  = First Sidebar
+regions[sidebar_second] = Second Sidebar
+regions[footer]         = Footer
+
+
+
+
